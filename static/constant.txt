@@ -1,0 +1,18 @@
+user_role={
+    'admin':2,
+    'subadmin':3
+    'user':4
+}
+status={
+    'active':1
+    'deactive':2
+    'delete':3
+}
+course_status={
+    'accepted':1
+    'completed':2 
+}
+bestseller = {
+    'yes':1
+    'no':0
+}
