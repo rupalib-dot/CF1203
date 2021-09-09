@@ -24,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v(83q0d%vcsh!98$*aa_8+xuj6eob@tpn81jr61bt+b!k)&%!9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,13 +86,23 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'CF1203',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+    # 'local_default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'CF1203',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+    #     'PORT': '3306',
+    # }
+     'default': {
+         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'rupalibhargava$CF1203',
+        'HOST': 'rupalibhargava.mysql.pythonanywhere-services.com',
+        'USER': 'rupalibhargava',
+        'PASSWORD': 'Pass@123',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
     }
 }
 
@@ -147,9 +158,9 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
- 
-# MAIL_PORT=465  
-# MAIL_ENCRYPTION=ssl  
+
+# MAIL_PORT=465
+# MAIL_ENCRYPTION=ssl
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.i4dev.in'
 EMAIL_USE_SSL = True
