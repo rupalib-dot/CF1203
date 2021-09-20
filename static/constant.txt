@@ -2,11 +2,13 @@ user_role={
     'admin':2,
     'subadmin':3
     'user':4
+    'tutor':5
 }
 status={
     'active':1
     'deactive':2
     'delete':3
+    'completed':4
 }
 course_status={
     'accepted':1

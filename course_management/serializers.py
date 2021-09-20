@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User 
-from course_management.models import Course,Category,Chapter,CourseAlloted
+from course_management.models import Course,Category,Chapter,CourseAlloted,quiz_ques_answer,quiz_question
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         # fields = "__all__"
-        fields = ("id","first_name","user_role","last_name","username",'email','status','user_image','phone')
+        fields = ("id","token","first_name","user_role","last_name","username",'email','status','user_image','phone')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,15 +30,27 @@ class ChapterSerializer(serializers.ModelSerializer):
        # fields = "__all__"
         fields = ("id", "chapter_name","category_id","course_id","about","discussions","bookmarks","status","chapter_file", "date")
 
+class QuizQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = quiz_question
+       # fields = "__all__"
+        fields = ("id","chapter_id","question","marks","question_status","date") 
+
+class QuizQuesAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = quiz_ques_answer
+       # fields = "__all__"
+        fields = ("id","question_id","answer","answer_status","correct_answer","date") 
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod
     def get_token(cls, user):
-        token = super(MyTokenObtainPairSerializer, cls).get_token(user)
+        tokendata = super(MyTokenObtainPairSerializer, cls).get_token(user)
 
         # Add custom claims
-        token['username'] = user.username
-        return token
+        tokendata['username'] = user.username
+        return tokendata
 
 class ChangePasswordSerializer(serializers.Serializer):
     model = User 

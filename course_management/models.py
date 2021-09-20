@@ -37,6 +37,7 @@ class Course(models.Model):
     course_level = models.CharField(_('course_level'), max_length=20, null = True, blank=True)
     bestseller = models.IntegerField(_('bestseller'),null = True, blank=True) 
     course_file = models.FileField(_('course_file'),null = True,  blank=True, upload_to='course_file/')
+    course_video = models.CharField(_('course_video'),max_length=250,null = True,  blank=True)
     date = models.CharField(_('date'), null = True,  max_length=50, blank=True,) 
 
 class Chapter(models.Model):
@@ -48,11 +49,13 @@ class Chapter(models.Model):
     ) 
     category_id = models.IntegerField(_('category_id'),null = True, blank=True)
     course_id = models.IntegerField(_('course_id'),null = True, blank=True)
+    parent_id = models.IntegerField(_('parent_id'),default=0, blank=True)
     about = models.TextField(_('about'), null = True, blank=True)
     discussions = models.TextField(_('discussions'), null = True, blank=True)
     bookmarks = models.TextField(_('bookmarks'), null = True, blank=True) 
     status = models.IntegerField(_('status'),null = True, blank=True)
-    chapter_file = models.FileField(_('chapter_file'),null = True,  blank=True, upload_to='chapter_file/')
+    chapter_file = models.FileField(_('chapter_file'),null = True,  blank=True, upload_to='chapter_file/') 
+    chapter_video = models.CharField(_('chapter_video'),max_length=250,null = True,  blank=True) 
     date = models.CharField(_('date'), null = True,  max_length=50, blank=True,) 
 
 class CourseAlloted(models.Model): 
@@ -61,3 +64,17 @@ class CourseAlloted(models.Model):
     user_id = models.IntegerField(_('user_id'),null = True, blank=True)
     course_status = models.IntegerField(_('course_status'),null = True, blank=True)
     date = models.CharField(_('date'), null = True,  max_length=50, blank=True,) 
+ 
+class quiz_question(models.Model): 
+    chapter_id = models.IntegerField(_('chapter_id'),null = True, blank=True)   
+    question = models.CharField(_('question'),  max_length=50,null = True, blank=True)
+    marks = models.CharField(_('marks'),  max_length=50,null = True, blank=True)
+    question_status = models.IntegerField(_('question_status'),null = True, blank=True)
+    date = models.CharField(_('date'), null = True,  max_length=50, blank=True,) 
+
+class quiz_ques_answer(models.Model): 
+    question_id = models.IntegerField(_('question_id'),null = True, blank=True)   
+    answer = models.CharField(_('answer'),  max_length=50,null = True, blank=True) 
+    correct_answer = models.IntegerField(_('correct_answer'),null = True, blank=True)
+    answer_status = models.IntegerField(_('answer_status'),null = True, blank=True)
+    date = models.CharField(_('date'), null = True,  max_length=50, blank=True,)
